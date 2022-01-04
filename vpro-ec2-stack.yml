@@ -53,7 +53,6 @@
             from_port: 22
             to_port: 22
             group_id: "{{BastionSGid}}"
-            register: vproStackSG_out
       register: vproStackSG_out
 
     - name: Update Securiry Group with its own sg id
@@ -62,7 +61,7 @@
         description: Allow port 22 from everywhere and all port within sg
         region: "{{region}}"
         vpc_id: "{{vpcid}}"
-        purge_rules: no
+        purge_rules: yes
         rules:
           - proto: all
             group_id: "{{vproStackSG_out.group_id}}"
